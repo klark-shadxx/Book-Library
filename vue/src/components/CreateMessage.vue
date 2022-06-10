@@ -34,6 +34,7 @@ export default {
   data() {
     return {
       message: {
+        topic: "",
         commentTitle: "",
         comments: "",
       },

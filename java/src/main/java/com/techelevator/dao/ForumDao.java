@@ -12,4 +12,6 @@ public interface ForumDao {
     Forum findForumByTopic (String topic);
 
     Forum addForum (Forum forum);
+
+    int findIdByTopic (String topic);
 }

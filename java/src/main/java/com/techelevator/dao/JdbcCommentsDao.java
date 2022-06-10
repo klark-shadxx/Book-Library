@@ -37,11 +37,19 @@ public class JdbcCommentsDao implements CommentsDao{
 
     @Override
     public Comments addComment(Comments comments) {
-        String sql = "INSERT INTO comments (forum_id, comment_title, comments)" +
-                "VALUES(?,?,?) RETURNING comment_id;";
-        int commentId =
-                jdbcTemplate.queryForObject(sql, Integer.class, comments.getForumId(), comments.getCommentTitle(), comments.getComments());
-        comments.setCommentId(commentId);
+        String commentsSql = "INSERT INTO comments (forum_id, comment_title, comments)" +
+                    "VALUES (?,?, ?)" +
+                    "RETURNING comment_id;";
+
+        int commentId = jdbcTemplate.queryForObject(commentsSql, Integer.class, comments.getForumId(), comments.getCommentTitle(), comments.getComments());
+
+        String retrieveId = "SELECT * FROM comments WHERE comment_id;";
+
+        SqlRowSet result = jdbcTemplate.queryForRowSet(retrieveId, commentId);
+
+        if (result.next()){
+            comments = commentsObjectMapper(result);
+        }
         return comments;
 
     }

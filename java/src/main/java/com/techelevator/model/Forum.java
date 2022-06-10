@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class Forum {
 
         private int forumId;
-//        private int userId;
+        private int userId;
         private String forumTopic;
 //        private LocalDate forumDate;
 
@@ -21,14 +21,14 @@ public class Forum {
         public Forum () {}
 
         public Forum(String forumTopic) {
-//        this.userId = userId;
+        this.userId = userId;
         this.forumTopic = forumTopic;
 //        this.forumDate = forumDate;
     }
 
-    public Forum(int forumId, String forumTopic) {
+    public Forum(int forumId, int userId, String forumTopic) {
         this.forumId = forumId;
-//        this.userId = userId;
+        this.userId = userId;
         this.forumTopic = forumTopic;
 //        this.forumDate = forumDate;
     }
@@ -41,13 +41,13 @@ public class Forum {
         this.forumId = forumId;
     }
 
-//    public int getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(int userId) {
-//        this.userId = userId;
-//    }
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
     public String getForumTopic() {
         return forumTopic;
     }
@@ -69,7 +69,7 @@ public class Forum {
     public String toString() {
         return "Forum{" +
                 "forumId=" + forumId +
-//                ", userId=" + userId +
+                ", userId=" + userId +
                 ", forumTopic='" + forumTopic +
 //                ", forumDate=" + forumDate +
                 '}';

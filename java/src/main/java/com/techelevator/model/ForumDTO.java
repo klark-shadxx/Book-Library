@@ -3,6 +3,15 @@ package com.techelevator.model;
 public class ForumDTO {
 
     private String username;
+
+    @Override
+    public String toString() {
+        return "ForumDTO{" +
+                "username='" + username + '\'' +
+                ", topic='" + topic + '\'' +
+                '}';
+    }
+
     private String topic;
 
     public String getUsername() {

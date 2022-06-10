@@ -3,10 +3,8 @@ package com.techelevator.controller;
 import com.techelevator.dao.BookDao;
 import com.techelevator.dao.CommentsDao;
 import com.techelevator.dao.ForumDao;
-import com.techelevator.model.Book;
-import com.techelevator.model.Comments;
-import com.techelevator.model.Forum;
-import com.techelevator.model.ForumDTO;
+import com.techelevator.dao.UserDao;
+import com.techelevator.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +24,10 @@ public class AppController {
 
     @Autowired
     ForumDao forumDao;
+
+
+    @Autowired
+    UserDao userDao;
 
     // BOOK URL REQUESTS
     //update book status
@@ -93,9 +95,16 @@ public class AppController {
         return commentsDao.findAllCommentsByForumId(forumId);
     }
     @RequestMapping(path = "/addComment", method = RequestMethod.POST)
-    public Comments addNewComment(@RequestBody Comments comments) {
-        //System.out.println("DEBUG, what the object looks like:");
-        return commentsDao.addComment(comments);
+    public Comments addNewComment(@RequestBody CommentsDTO commentsDTO) {
+        System.out.println("DEBUG, what the object looks like:" + commentsDTO);
+        int forumId = forumDao.findIdByTopic(commentsDTO.getTopic());
+
+        Comments comments = new Comments();
+        comments.setForumId(forumId);
+        comments.setCommentTitle(commentsDTO.getCommentTitle());
+        comments.setComments(commentsDTO.getComments());
+         commentsDao.addComment(comments);
+        return null;
     }
     // FORUM URL REQUESTS
 
@@ -111,21 +120,36 @@ public class AppController {
     }
 
     @RequestMapping(path = "/addForum", method = RequestMethod.POST)
-    public Forum addNewForum(@RequestBody Forum forum) {
-        //System.out.println("DEBUG, what the object looks like:");
-        System.out.println(forum);
-        return forumDao.addForum(forum);
+    public Forum addNewForum(@RequestBody ForumDTO forumDTO) {
+        System.out.println("DEBUG, what the object looks like:" + forumDTO);
+        int userId = userDao.findIdByUsername(forumDTO.getUsername());
+
+        Forum forum = new Forum();
+        forum.setUserId(userId);
+        forum.setForumTopic(forumDTO.getTopic());
+
+        forumDao.addForum(forum);
+
+        return null;
+
+//        System.out.println(forum);
+
+//    @RequestMapping(path = "/addForum", method = RequestMethod.POST)
+//    public Forum addNewForum(@RequestBody Forum forum) {
+//        //System.out.println("DEBUG, what the object looks like:");
+//        System.out.println(forum);
+//        return forumDao.addForum(forum);
     }
 
 
 //    @RequestMapping(path = "/addForum", method = RequestMethod.POST)
 //    public Forum addNewForum(@RequestBody ForumDTO forumDTO) {
-//        //System.out.println("DEBUG, what the object looks like:");
-////        System.out.println(forum);
-////        return forumDao.addForum(forum);
+//        System.out.println("DEBUG, what the object looks like:");
+//        System.out.println(forum);
+//        return forumDao.addForum(forum);
 //        System.out.println("hello?");
 //        System.out.println(forumDTO.getTopic() + " " + forumDTO.getUsername());
-//
+
 //        // Build a forum object
 //        // 1. find out what the user id is, we know what the username is.
 //

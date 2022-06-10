@@ -1,6 +1,8 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Forum;
+import com.techelevator.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -14,7 +16,8 @@ import java.util.List;
 public class JdbcForumDao implements ForumDao {
 
     private JdbcTemplate jdbcTemplate;
-
+    @Autowired
+    UserDao userDao;
 
     public JdbcForumDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -50,13 +53,25 @@ public class JdbcForumDao implements ForumDao {
 
     @Override
     public Forum addForum(Forum forum) {
-            String sql = "INSERT INTO forum (forum_topic) " +
-                    "VALUES(?) RETURNING forum_id;";
-            int forumId =
-                    jdbcTemplate.queryForObject(sql, Integer.class, forum.getForumTopic());
-            forum.setForumId(forumId);
+            String forumSql = "INSERT INTO forum (user_id, forum_topic) " +
+                    "VALUES(?,?) RETURNING forum_id;";
 
+            int forumId = jdbcTemplate.queryForObject(forumSql,Integer.class, forum.getUserId(),forum.getForumTopic());
+
+            String retrieveSQL = "SELECT * FROM forum WHERE forum_id=?";
+
+            SqlRowSet result = jdbcTemplate.queryForRowSet(retrieveSQL, forumId);
+
+            if (result.next()) {
+                forum = forumObjectMapper(result);
+
+            }
         return forum;
+    }
+
+    @Override
+    public int findIdByTopic(String topic) {
+        return jdbcTemplate.queryForObject("select forum_id FROM forum WHERE forum_topic = ?;",int.class, topic);
     }
 
 
@@ -64,7 +79,7 @@ public class JdbcForumDao implements ForumDao {
 
         Forum forum = new Forum();
         forum.setForumId(results.getInt("forum_id"));
-//        forum.setUserId(results.getInt("user_id"));
+        forum.setUserId(results.getInt("user_id"));
         forum.setForumTopic(results.getString("forum_topic"));
 //        forum.setForumDate(LocalDate.parse(results.getString("forum_date")));
 

@@ -3,7 +3,7 @@
         <div class="field">
         
           <div id='input-div'>
-            <input class="form-control form-control-lg" type="text" placeholder="Add New Topic" v-model="forum.forumTopic"/>
+            <input class="form-control form-control-lg" type="text" placeholder="Add New Topic" v-model="forum.topic"/>
              </div>
              <div id="action">
              <button id="save" class="btn btn-primary btn-lg" type="submit" v-on:click="saveTopic()">Save Topic</button>
@@ -20,8 +20,8 @@ export default {
     data(){
         return{
             forum:{
-                forumTopic: "",
-               
+                topic: "",
+                username: this.$store.state.username
             }
         };
     },

@@ -44,6 +44,7 @@ INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpUL
 
  CREATE TABLE forum (
  	forum_id Serial PRIMARY KEY,
+	user_id int REFERENCES users (user_id), 
  	forum_topic varChar(200) NOT NULL
  );
 
