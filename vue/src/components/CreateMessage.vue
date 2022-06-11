@@ -69,6 +69,7 @@ h1 {
 #input {
   padding-left: 22%;
   font-size: 30px;
+  margin-top: -20%;
  
 }
 
@@ -94,8 +95,8 @@ textarea {
   justify-content: right;
 }
 img{
-  padding-top: 20px;
-  padding-left: 50px;
+  padding-top: 10%;
+  padding-left: 1%;
 
 
 }

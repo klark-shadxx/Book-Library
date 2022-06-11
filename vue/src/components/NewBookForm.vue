@@ -1,13 +1,13 @@
-// <template> 
-<!-- //wrap in a v-if $store.state.user.permission - allow show page, if not show "you don't have access" -->
+// <template>
+  <!-- //wrap in a v-if $store.state.user.permission - allow show page, if not show "you don't have access" -->
   <div class="text-center">
     <form class="new-book-form" v-on:submit.prevent="saveBook">
       <div id="header">
-      <header>
-        <img id="NewBookForm" src="../assets/NewBookForm.png"/>
+        <header>
+          <img id="NewBookForm" src="../assets/NewBookForm.png" />
         </header>
       </div>
-      
+
       <div class="input">
         <input
           class="form-control"
@@ -44,7 +44,7 @@
           v-model="book.character"
           required
         />
-         <input
+        <input
           class="form-control"
           type="text"
           placeholder="ISBN"
@@ -52,19 +52,9 @@
           required
         />
       </div>
-      <!-- <div>
-        <label for="new-release-input" id="checkbox-text">New Release:</label>
-        <input
-          class="form-check-input"
-          id="checkbox-text"
-          type="checkbox"
-          placeholder="New Release"
-          v-model="book.newRelease"
-        />
-      </div> -->
       <div id="button">
-      <button class="btn btn-primary btn-lg">Save</button>
-    </div >
+        <button class="btn btn-primary btn-lg">Save</button>
+      </div>
     </form>
   </div>
 </template>
@@ -82,24 +72,21 @@ export default {
         genre: "",
         keyword: "",
         character: "",
-        isbn:"",
+        isbn: "",
         newRelease: false,
       },
     };
   },
   methods: {
-       saveBook() {
-        bookService
-        .create(this.book)
-        .then((response)=>{
-          if(response.status === 200){
-            window.alert("Book Created!"); 
-          }
-        });
-      }
-    }
-  }
-
+    saveBook() {
+      bookService.create(this.book).then((response) => {
+        if (response.status === 200) {
+          window.alert("Book Created!");
+        }
+      });
+    },
+  },
+};
 </script>
 <style scoped>
 input {
@@ -118,24 +105,24 @@ input {
   font-size: 20px;
   font-weight: bolder;
 }
-#header{
- display: grid;
-padding-right: 10%;
+#header {
+  display: grid;
+  padding-right: 1%;
   justify-content: left;
 }
-button{
+button {
   display: grid;
   box-shadow: grey;
 }
-#button{
-  padding-left: 25%;
+#button {
+  padding-left: 22%;
 }
-#NewBookForm{
+#NewBookForm {
   padding-top: 5%;
   padding-bottom: 2%;
-  padding-left: 5%;
+  padding-left: 10%;
 }
-#text-center{
+#text-center {
   text-align: center;
 }
 </style>
