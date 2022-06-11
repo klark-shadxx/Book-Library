@@ -2,12 +2,12 @@
 <!-- //wrap in a v-if $store.state.user.permission - allow show page, if not show "you don't have access" -->
   <div class="text-center">
     <form class="new-book-form" v-on:submit.prevent="saveBook">
+      <div id="header">
       <header>
-        <img id = "NewBookForm" src="../assets/NewBookForm.png"/>
+        <img id="NewBookForm" src="../assets/NewBookForm.png"/>
         </header>
-        <div class ="img">
-    
       </div>
+      
       <div class="input">
         <input
           class="form-control"
@@ -62,7 +62,9 @@
           v-model="book.newRelease"
         />
       </div> -->
+      <div id="button">
       <button class="btn btn-primary btn-lg">Save</button>
+    </div >
     </form>
   </div>
 </template>
@@ -108,22 +110,32 @@ input {
 }
 
 .input {
-  padding-left: 500px;
-  padding-right: 500px;
+  padding-left: 12%;
+  padding-right: 10%;
 }
 
 #checkbox-text {
   font-size: 20px;
   font-weight: bolder;
 }
-
-header{
-  text-align: center;
-  padding: 50px;
+#header{
+ display: grid;
+padding-right: 10%;
+  justify-content: left;
 }
-
 button{
+  display: grid;
   box-shadow: grey;
 }
-
+#button{
+  padding-left: 25%;
+}
+#NewBookForm{
+  padding-top: 5%;
+  padding-bottom: 2%;
+  padding-left: 5%;
+}
+#text-center{
+  text-align: center;
+}
 </style>

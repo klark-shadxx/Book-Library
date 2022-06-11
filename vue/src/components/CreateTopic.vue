@@ -1,44 +1,49 @@
 <template>
-    <form v-on:submit.prevent>
-        <div class="field">
-        
-          <div id='input-div'>
-            <input class="form-control form-control-lg" type="text" placeholder="Add New Topic" v-model="forum.topic"/>
-             </div>
-             <div id="action">
-             <button id="save" class="btn btn-primary btn-lg" type="submit" v-on:click="saveTopic()">Save Topic</button>
-            </div>
-        </div>
-    </form>
+  <form v-on:submit.prevent="saveTopic(); setTopicTitle();">
+    <div class="field">
+      <div id="input-div">
+        <input
+          class="form-control form-control-lg"
+          type="text"
+          placeholder="Add New Topic"
+          v-model="forum.forumTopic"
+        />
+      </div>
+      <div id="action">
+        <button id="save" class="btn btn-primary btn-lg" type="submit">
+          Save Topic
+        </button>
+      </div>
+    </div>
+  </form>
 </template>
 
 <script>
 import forumService from "../services/ForumService";
 
 export default {
-    name: "create-topic",
-    data(){
-        return{
-            forum:{
-                topic: "",
-                username: this.$store.state.username
-            }
-        };
-    },
-    methods:{
-        saveTopic(){
-            forumService
-            .create(this.forum)
-            .then((response)=>{
-                if(response.status === 200){
-                    window.alert("Topic Created!")
-                    this.$router.push("/forum-view");
-                }
-            })
+  name: "create-topic",
+  data() {
+    return {
+      forum: {
+        forumTopic: "",
+      },
+    };
+  },
+  methods: {
+    saveTopic() {
+      forumService.create(this.forum).then((response) => {
+        if (response.status === 200) {
+          window.alert("Topic Created!");
+          this.$router.push("/forum-detail");
         }
+      });
+    },
+    setTopicTitle() {
+      this.$store.commit('SET_TOPIC_TITLE', this.forum.forumTopic)
     }
-
-        };
+  },
+};
 </script>
 
 <style>
@@ -70,29 +75,27 @@ form * {
   text-align: right;
   padding: 10px 0;
 }
-#addTopic{
+#addTopic {
   text-align: center;
 }
-#addTopicBanner{
+#addTopicBanner {
   max-width: 25%;
 }
-input{
+input {
   max-width: 600px;
   outline: solid 2px #f3969a;
 }
-#input-div{
+#input-div {
   display: flex;
   flex-flow: column wrap;
   align-items: center;
   padding-top: 30px;
   padding-bottom: 30px;
 }
-#action{
+#action {
   text-align: center;
-  
 }
 img {
   padding-top: 100px;
 }
-
 </style>

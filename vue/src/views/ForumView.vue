@@ -6,13 +6,17 @@
     </div>
     <create-topic></create-topic>
     <topicList></topicList>
+    <div id="os-widget-1014995" class="os_poll" data-path="/polls/2846471" 
+    data-of="karen-morris" data-opinionstage-widget="338a1905-e707-467c-a4d2-cbe45e6e43cd"></div>
     
     
     
   </div>
 </template>
 
-<script>
+
+<script >
+
 import topicList from '../components/TopicList.vue'
 import createTopic from '../components/CreateTopic.vue'
 
@@ -63,6 +67,7 @@ header{
   text-align: center;
   padding-bottom: 30px;
   padding-left: 80px;
+  padding-top: 20px;
 }
 </style>
 

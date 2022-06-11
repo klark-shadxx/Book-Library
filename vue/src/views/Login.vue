@@ -50,7 +50,7 @@
 </template>
 
 <script>
-var myTrack=new Audio('../assets/bookPage.mp3');
+var audio = new Audio("../assets/windchime.mp3");
 import authService from "../services/AuthService";
 
 export default {
@@ -94,13 +94,13 @@ export default {
           }
         });
     },
-    playSound(){
-      myTrack.play()
+   
+      playSound() {
+      audio.play();
+}
     }
  
-    }
-  
-};
+    };
 </script>
 
 <style scoped>

@@ -13,7 +13,8 @@ export default {
     name: 'forum-detail',
     components: {
         TopicDetails
-    }
+    },
+
 }
 </script>
 

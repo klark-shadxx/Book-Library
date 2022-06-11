@@ -6,6 +6,7 @@
       <router-link class="navbar-brand" v-bind:to="{name: 'ForumView'}" v-if="$store.state.token != ''">Forum</router-link>
       <router-link class="navbar-brand" v-bind:to="{ name: 'AddBook' }" v-if="$store.state.username == 'admin'">Add a New Book</router-link>
       <router-link class="navbar-brand" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
+    
     </div>
     <router-view />
   </div>
@@ -21,6 +22,7 @@
 #nav {
 padding-left: 30px;
 font-size:large;
+
 
 }
 

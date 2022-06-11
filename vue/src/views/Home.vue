@@ -4,17 +4,22 @@
      <img id = "letsGetReading" src="../assets/LibraryProject.png"/>
     </header>
     <search-bar :books="books"></search-bar>
+   
+   
   </div>
+
 </template>
 
 <script>
 import bookService from "../services/BookService";
 import searchBar from "../components/SearchBar.vue";
 
+
 export default {
   name: "home",
   components: {
     searchBar,
+   
   },
   data() {
     return {
@@ -60,5 +65,9 @@ export default {
 header{
   text-align: center;
   padding: 50px;
+}
+#letsGetReading {
+  padding: 10px;
+  width: 1500px;
 }
 </style>
